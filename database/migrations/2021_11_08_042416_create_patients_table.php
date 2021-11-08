@@ -19,8 +19,8 @@ class CreatePatientsTable extends Migration
             $table->string('phone');
             $table->text('address');
             $table->string('status');
-            $table->date('in_date_at');
-            $table->date('out_date_at');
+            $table->date('in_date_at')->nullable();
+            $table->date('out_date_at')->nullable();
             $table->timestamps();
         });
     }
