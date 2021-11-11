@@ -27,7 +27,7 @@ class InitSeeder extends Seeder
             'name'        => 'Chris Pitt',
             'phone'       => '123456',
             'address'     => 'Jupiter',
-            'status'      => 'Negative',
+            'status'      => 'Recovered',
             'in_date_at'  => date('YmdHis'),
             'out_date_at' => date('YmdHis')
         ]);
