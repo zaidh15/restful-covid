@@ -16,7 +16,7 @@ class InitSeeder extends Seeder
     public function run()
     {
         Patient::create([
-            'name'        => 'John Doe',
+            'name'        => 'John',
             'phone'       => '12345',
             'address'     => 'Mars',
             'status'      => 'Positive',
@@ -24,7 +24,7 @@ class InitSeeder extends Seeder
         ]);
 
         Patient::create([
-            'name'        => 'Chris Pitt',
+            'name'        => 'Chris',
             'phone'       => '123456',
             'address'     => 'Jupiter',
             'status'      => 'Recovered',
@@ -33,7 +33,7 @@ class InitSeeder extends Seeder
         ]);
 
         Patient::create([
-            'name'        => 'XAE-17',
+            'name'        => 'Doe',
             'phone'       => '1234567',
             'address'     => 'Pluto',
             'status'      => 'Dead',
