@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 #mengimport Model Patient untuk interaksi dengan database
 use Illuminate\Http\Request;
 use App\Models\Patient;
-
+use Validator;
 class PatientController extends Controller
 {
     #membuat method index
@@ -146,8 +146,8 @@ class PatientController extends Controller
 
     public function store(Request $request)
     {
-        #membuat validasi 
-        $validateData = $request->validate([
+        # membuat validasi 
+        $validation = Validator::make($request->all(), [
             'name' => 'required|string',
             'phone' => 'required|numeric',
             'address' => 'required|string',
@@ -156,15 +156,33 @@ class PatientController extends Controller
             'out_date_at' => 'nullable',
         ]);
 
-        #menggunakan model Patient untuk insert data
-        $patients = Patient::create($validateData);
+        if($validation->fails()){
+            return $validation->errors();
+        }
 
-        $data = [
-            'message' => 'Resource is added successfully',
-            'data' => $patients
-        ];
-        #menguirim data bentuk json dan kode 201
-        return response()->json($data, 201);
+        # menggunakan model Patient untuk insert data
+        $patients = Patient::create([
+            'name' => $request->name,
+            'phone' => $request->phone,
+            'address' => $request->address,
+            'status' => $request->status,
+            'in_date_at' => $request->in_date_at,
+            'out_date_at' => $request->out_date_at
+        ]);
+
+        if($patients){
+            $data = [
+                'message' => 'Resource is added successfully',
+                'data' => $patients
+            ];
+            #menguirim data bentuk json dan kode 201
+            return response()->json($data, 201);
+        }else{
+            $data = [
+                'message' => 'Resource failed to be added'
+            ];
+            return response()->json($data, 404);
+        }
     }
 
     public function update(Request $request, $id)
